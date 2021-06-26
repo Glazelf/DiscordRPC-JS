@@ -14,7 +14,7 @@ const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
 rpc.login({ clientID }).catch(console.error);
 
-rpc.on('ready'), () => {
+rpc.on('ready', () => {
     console.log(`Logged in as ${client.application.name}.`);
     console.log(`Authed for user ${client.user.username}.`);
     console.log(config.timestamp);
@@ -24,7 +24,7 @@ rpc.on('ready'), () => {
     setInterval(() => {
         setActivity();
     }, 15e3);
-};
+});
 
 async function setActivity() {
     let activityObject = {};
