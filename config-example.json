@@ -9,5 +9,6 @@
     "button1Label": "",
     "button1URL": "",
     "button2Label": "",
-    "button2URL": ""
+    "button2URL": "",
+    "timestamp": true
 }
