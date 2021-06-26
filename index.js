@@ -27,10 +27,8 @@ rpc.on('ready'), () => {
 };
 
 async function setActivity() {
-    let activiyObject = {};
-    if (config.timestamp) {
-        activityObject = { startTimestamp };
-    };
+    let activityObject = {};
+    if (config.timestamp) activityObject = { startTimestamp };
 
     if (config.details) activityObject['details'] = config.details;
     if (config.state) activityObject['state'] = config.state;
