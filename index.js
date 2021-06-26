@@ -59,10 +59,13 @@ async function setActivity() {
             URL: config.button1URL
         };
     };
+
     if (config.button2Label && config.button2URL) {
         activityObject['button2'] = {
             label: config.button2Label,
             URL: config.button2URL
         };
     };
+
+    rpc.setActivity(activityObject);
 };
