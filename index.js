@@ -1,5 +1,6 @@
 const DiscordRPC = require('discord-rpc');
 const config = require('./config.json');
+const getTime = require('./util/getTime');
 
 let clientID = config.clientID;
 let startTimestamp = new Date();
@@ -78,13 +79,4 @@ async function setActivity() {
     console.log(`Set activity. (${currentTime})`);
 };
 
-async function getTime() {
-    let currentdate = new Date();
-    let datetime = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":"
-        + currentdate.getSeconds();
-    return datetime;
-};
+
