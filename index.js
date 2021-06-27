@@ -19,8 +19,9 @@ try {
 };
 
 // Ready event
-rpc.on('ready', () => {
-    console.log(`Setting rich presence for ${rpc.user.username}...`);
+rpc.on('ready', async () => {
+    let startTime = await getTime();
+    console.log(`Setting rich presence for ${rpc.user.username}... (${startTime})`);
 
     setActivity();
 
@@ -31,6 +32,7 @@ rpc.on('ready', () => {
 });
 
 async function setActivity() {
+    let currentTime = await getTime();
     let activityObject = {};
     let buttons = [];
     if (config.timestamp) activityObject = { startTimestamp };
@@ -71,5 +73,18 @@ async function setActivity() {
     };
     if (buttons.length > 0) activityObject['buttons'] = buttons;
 
-    rpc.setActivity(activityObject);
+    await rpc.setActivity(activityObject);
+
+    console.log(`Set activity. (${currentTime})`);
+};
+
+async function getTime() {
+    let currentdate = new Date();
+    let datetime = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
+    return datetime;
 };
