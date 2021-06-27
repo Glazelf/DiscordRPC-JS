@@ -17,7 +17,6 @@ rpc.login({ clientID }).catch(console.error);
 rpc.on('ready', () => {
     console.log(`Logged in as ${client.application.name}.`);
     console.log(`Authed for user ${client.user.username}.`);
-    console.log(config.timestamp);
 
     setActivity();
 
