@@ -12,11 +12,14 @@ try {
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
-rpc.login({ clientId: clientID }).catch(console.error);
+try {
+    rpc.login({ clientId: clientID }).catch(console.error);
+} catch (e) {
+    return console.log(e);
+};
 
 rpc.on('ready', () => {
-    console.log(`Logged in as ${client.application.name}.`);
-    console.log(`Authed for user ${client.user.username}.`);
+    console.log(`Setting rich presence for ${rpc.user.username}...`);
 
     setActivity();
 
