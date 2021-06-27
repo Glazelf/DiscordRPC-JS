@@ -43,7 +43,7 @@ async function setActivity() {
     // Images
     if (config.largeImageKey) {
         try {
-            activityObject['largeImageKey'] = config.largeImageKey;
+            activityObject['largeImageKey'] = config.largeImageKey.toLowerCase();
         } catch (e) {
             console.log("Large image key invalid.");
         };
@@ -51,7 +51,7 @@ async function setActivity() {
     if (config.largeImageText) activityObject['largeImageText'] = config.largeImageText;
     if (config.smallImageKey) {
         try {
-            activityObject['smallImageKey'] = config.smallImageKey;
+            activityObject['smallImageKey'] = config.smallImageKey.toLowerCase();
         } catch (e) {
             console.log("Small image key invalid.");
         };
