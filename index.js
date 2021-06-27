@@ -18,11 +18,13 @@ try {
     return console.log(e);
 };
 
+// Ready event
 rpc.on('ready', () => {
     console.log(`Setting rich presence for ${rpc.user.username}...`);
 
     setActivity();
 
+    // Loop every 15 seconds
     setInterval(() => {
         setActivity();
     }, 15e3);
@@ -30,11 +32,13 @@ rpc.on('ready', () => {
 
 async function setActivity() {
     let activityObject = {};
+    let buttons = [];
     if (config.timestamp) activityObject = { startTimestamp };
 
     if (config.details) activityObject['details'] = config.details;
     if (config.state) activityObject['state'] = config.state;
 
+    // Images
     if (config.largeImageKey) {
         try {
             activityObject['largeImageKey'] = config.largeImageKey;
@@ -43,7 +47,6 @@ async function setActivity() {
         };
     };
     if (config.largeImageText) activityObject['largeImageText'] = config.largeImageText;
-
     if (config.smallImageKey) {
         try {
             activityObject['smallImageKey'] = config.smallImageKey;
@@ -53,19 +56,20 @@ async function setActivity() {
     };
     if (config.smallImageText) activityObject['smallImageText'] = config.smallImageText;
 
+    // Buttons
     if (config.button1Label && config.button1URL) {
-        activityObject['button1'] = {
+        buttons.push({
             label: config.button1Label,
-            URL: config.button1URL
-        };
+            url: config.button1URL
+        });
     };
-
     if (config.button2Label && config.button2URL) {
-        activityObject['button2'] = {
+        buttons.push({
             label: config.button2Label,
-            URL: config.button2URL
-        };
+            url: config.button2URL
+        });
     };
+    if (buttons.length > 0) activityObject['buttons'] = buttons;
 
     rpc.setActivity(activityObject);
 };
