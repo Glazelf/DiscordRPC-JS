@@ -12,7 +12,7 @@ try {
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
-rpc.login({ clientID }).catch(console.error);
+rpc.login({ clientId: clientID }).catch(console.error);
 
 rpc.on('ready', () => {
     console.log(`Logged in as ${client.application.name}.`);
