@@ -21,7 +21,7 @@ try {
 
 // Ready event
 rpc.on('ready', async () => {
-    let startTime = await getTime();
+    let startTime = getTime();
     console.log(`Setting rich presence for ${rpc.user.username}... (${startTime})`);
 
     setActivity();
@@ -29,11 +29,11 @@ rpc.on('ready', async () => {
     // Loop every 15 seconds
     setInterval(() => {
         setActivity();
-    }, 15e3);
+    }, 15000);
 });
 
 async function setActivity() {
-    let currentTime = await getTime();
+    let currentTime = getTime();
     let activityObject = {};
     let buttons = [];
     if (config.timestamp) activityObject = { startTimestamp };
@@ -76,7 +76,5 @@ async function setActivity() {
 
     await rpc.setActivity(activityObject);
 
-    console.log(`Set activity. (${currentTime})`);
+    return console.log(`Set activity. (${currentTime})`);
 };
-
-
