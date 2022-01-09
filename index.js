@@ -20,7 +20,7 @@ try {
 };
 
 // Ready event
-rpc.on('ready', async () => {
+rpc.on('ready', () => {
     console.log(`Setting rich presence for ${rpc.user.username}...`);
 
     setActivity();
@@ -31,7 +31,7 @@ rpc.on('ready', async () => {
     }, 15 * 1000);
 });
 
-async function setActivity() {
+function setActivity() {
     let currentTime = getTime();
     let activityObject = {};
     let buttons = [];
@@ -73,7 +73,7 @@ async function setActivity() {
     };
     if (buttons.length > 0) activityObject['buttons'] = buttons;
 
-    await rpc.setActivity(activityObject);
+    rpc.setActivity(activityObject);
 
     return console.log(`Refreshed presence. (${currentTime})`);
 };
