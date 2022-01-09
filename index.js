@@ -25,10 +25,10 @@ rpc.on('ready', () => {
 
     setActivity();
 
-    // Loop every 15 seconds
+    // Loop every 10 minutes
     setInterval(() => {
         setActivity();
-    }, 15 * 1000);
+    }, 10 * 1000 * 60);
 });
 
 function setActivity() {
