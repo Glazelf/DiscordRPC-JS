@@ -1,30 +1,23 @@
 const DiscordRPC = require('discord-rpc');
 const config = require('./config.json');
 const getTime = require('./util/getTime');
-
 let clientID = config.clientID;
 let startTimestamp = new Date();
-
 try {
     DiscordRPC.register(clientID);
 } catch (e) {
     return console.log("You must provide a valid client ID.");
 };
-
 const rpc = new DiscordRPC.Client({ transport: 'ipc' });
-
 try {
     rpc.login({ clientId: clientID }).catch(console.error);
 } catch (e) {
     return console.log(e);
 };
-
 // Ready event
 rpc.on('ready', () => {
     console.log(`Setting rich presence for ${rpc.user.username}...`);
-
     setActivity();
-
     // Loop every 10 minutes
     setInterval(() => {
         setActivity();
@@ -36,10 +29,8 @@ function setActivity() {
     let activityObject = {};
     let buttons = [];
     if (config.timestamp) activityObject = { startTimestamp };
-
     if (config.details) activityObject['details'] = config.details;
     if (config.state) activityObject['state'] = config.state;
-
     // Images
     if (config.largeImageKey) {
         try {
@@ -57,7 +48,6 @@ function setActivity() {
         };
     };
     if (config.smallImageText) activityObject['smallImageText'] = config.smallImageText;
-
     // Buttons
     if (config.button1Label && config.button1URL) {
         buttons.push({
@@ -74,6 +64,5 @@ function setActivity() {
     if (buttons.length > 0) activityObject['buttons'] = buttons;
 
     rpc.setActivity(activityObject);
-
     return console.log(`Refreshed presence. (${currentTime})`);
 };
